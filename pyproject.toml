@@ -1,0 +1,47 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "setuptools_scm",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "htmlcrypt"
+authors = [
+  { name="mricherzhagen" },
+]
+description = "Tool for encrypting HTML files and generating JavaScript to decrypt it"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+license = {text = "MIT License"}
+dependencies = [
+    "pycryptodome",
+]
+dynamic = ["version"]
+
+# Get version from git
+[tool.setuptools_scm]
+
+[project.urls]
+"Homepage" = "https://github.com/mricherzhagen/htmlcrypt"
+"Bug Tracker" = "https://github.com/mricherzhagen/htmlcrypt/issues"
+
+[project.scripts]
+htmlcrypt = "htmlcrypt.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+htmlcrypt = [
+    "decrypt.html",
+]
+
+[tool.mypy]
+strict = true
+files = 'src/htmlcrypt/'
