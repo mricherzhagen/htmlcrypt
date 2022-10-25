@@ -9,7 +9,7 @@ Inspired/Based on [MaxLaumeister/PageCrypt](https://github.com/MaxLaumeister/Pag
 Use `python3 -m htmlcrypt -p $PASS -o content.html.encrypted input_file.html` to encrypt `input_file.html` with password from `$PASS`.
 
 ```
-usage: python -m htmlcrypt [-h] [-p PASSWORD] [-o OUTPUT] [-f] file
+usage: python -m htmlcrypt [-h] [-p PASSWORD] [-e ENCRYPTED] [-d DECRYPT] [-f] file
 
 Encrypt HTML file with password
 
@@ -20,7 +20,9 @@ options:
   -h, --help            show this help message and exit
   -p PASSWORD, --password PASSWORD
                         Password for encrypting/decrypting. Will ask for password from stdin if not specified
-  -o OUTPUT, --output OUTPUT
+  -e ENCRYPTED, --encrypted ENCRYPTED
                         Encrypted filename
+  -d DECRYPT, --decrypt DECRYPT
+                        Location to generate the decryption .html file. Relative path to encrypted file will be injected into file.
   -f, --force           Overwrite existing output file
 ```
