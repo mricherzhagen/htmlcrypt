@@ -45,9 +45,9 @@ def main() -> None:
     args = parser.parse_args()
 
     encrypted_file_arg.default = (
-        args.decrypt.name + ".content.encrypted"
+        str(args.decrypt.with_suffix(args.decrypt.suffix + ".content.encrypted"))
         if args.decrypt
-        else args.file.name + ".encrypted"
+        else str(args.file.with_suffix(args.file.suffix + ".encrypted"))
     )
     args = parser.parse_args()
 
@@ -85,6 +85,7 @@ def main() -> None:
             encrypt_file(password, input_file, output_file)
 
     if args.decrypt:
+        print(f"Writing decrypt file to {args.decrypt.name}")
         write_decrypt_file(args.decrypt, args.encrypted.name)
 
 
