@@ -12,7 +12,8 @@ from .decrypt import write_decrypt_file
 def main() -> None:
     """Use sys.argv arguments to specify file for encryption"""
     parser = argparse.ArgumentParser(
-        prog="python -m htmlcrypt", description="Encrypt HTML file with password"
+        prog="python -m htmlcrypt" if __name__ == "__main__" else None,
+        description="Encrypt HTML file with password",
     )
     parser.add_argument(
         "-p",

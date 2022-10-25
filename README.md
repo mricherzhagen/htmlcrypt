@@ -6,10 +6,10 @@ Inspired/Based on [MaxLaumeister/PageCrypt](https://github.com/MaxLaumeister/Pag
 
 `decrypt.html` decrypts `content.html.encrypted` from same folder. Change `const encryptedFileName = 'content.html.encrypted';` to change to a different filename.
 
-Use `python3 -m htmlcrypt -p $PASS -o content.html.encrypted input_file.html` to encrypt `input_file.html` with password from `$PASS`.
+Use `htmlcrypt -p $PASS -o content.html.encrypted input_file.html` to encrypt `input_file.html` with password from `$PASS`.
 
 ```
-usage: python -m htmlcrypt [-h] [-p PASSWORD] [-e ENCRYPTED] [-d DECRYPT] [-f] file
+usage: htmlcrypt [-h] [-p PASSWORD] [-e ENCRYPTED] [-d DECRYPT] [-f] file
 
 Encrypt HTML file with password
 
