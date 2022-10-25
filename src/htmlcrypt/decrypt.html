@@ -1,4 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html><head>
+  <!-- Page encrypted with https://github.com/mricherzhagen/htmlcrypt -->
+  <meta charset="UTF-8">
   <script>
     const encryptedFileName = 'content.html.encrypted';
     const localStorageKey = 'decrypt_password';
@@ -72,16 +75,30 @@
           return cleartext;
         }).then(swapContent)
         .catch(function(err) {
+          console.log(err)
           alert("Error during decryption");
         });
       });
     })
   </script>
-  <body>
+  <style>
+    html,body {
+      height: 100%;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  </style>
+</head><body>
+  <div class="container">
     <form action="javascript:;">
-      <label>Password: <input type="password" id="decryptPassword" required="required" autocomplete="off"></label> <button id="decryptButton">Decrypt</button>
+      <input type="password" id="decryptPassword" required="required" placeholder="Password"> <button id="decryptButton">Decrypt</button>
       <br/>
       <label><input type="checkbox" checked="checked" id="storePasswordCheckbox"> Store password</label>
     </form>
-  </body>
-</html>
+  </div>
+</body></html>
