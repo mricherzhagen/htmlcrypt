@@ -5,7 +5,7 @@ Provide command line interface for htmlcrypt tool
 import argparse
 import pathlib
 from getpass import getpass
-from . import encrypt_file
+from .encrypt import encrypt_file
 
 
 def main() -> None:
