@@ -22,8 +22,8 @@ def main() -> None:
     input_file_arg = parser.add_argument(
         "file", type=pathlib.Path, help="File to encrypt"
     )
-    output_file_arg = parser.add_argument(
-        "-o", "--output", type=pathlib.Path, help="Encrypted filename"
+    encrypted_file_arg = parser.add_argument(
+        "-e", "--encrypted", type=pathlib.Path, help="Encrypted filename"
     )
     parser.add_argument(
         "-f",
@@ -35,6 +35,19 @@ def main() -> None:
 
     args = parser.parse_args()
 
+    encrypted_file_arg.default = (
+        args.decrypt.name + ".content.encrypted"
+        if args.decrypt
+        else args.file.name + ".encrypted"
+    )
+    args = parser.parse_args()
+
+    file_set = {args.file.resolve(), args.encrypted.resolve()}
+    if len(file_set) != 2:
+        parser.error(
+            "You cannot supply the same file as input file and --encrypted argument"
+        )
+
     if args.password:
         password = args.password
     else:
@@ -45,14 +58,13 @@ def main() -> None:
             print("Passwords did not match. Try again")
 
     input_file_arg.type = argparse.FileType("rb")
-    output_file_arg.type = argparse.FileType("xb" if not args.force else "wb")
-    output_file_arg.default = args.file.name + ".encrypted"
+    encrypted_file_arg.type = argparse.FileType("xb" if not args.force else "wb")
     args = parser.parse_args()
 
-    print(f"Encrypting {args.file.name} to {args.output.name}")
+    print(f"Encrypting {args.file.name} to {args.encrypted.name}")
 
     with args.file as input_file:
-        with args.output as output_file:
+        with args.encrypted as output_file:
             encrypt_file(password, input_file, output_file)
 
 
