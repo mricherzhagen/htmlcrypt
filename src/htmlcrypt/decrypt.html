@@ -1,0 +1,87 @@
+<html>
+  <script>
+    const encryptedFileName = 'content.html.encrypted';
+    const localStorageKey = 'decrypt_password';
+    let dataPromise = fetch(encryptedFileName)
+      .then((response) => response.arrayBuffer());
+    let content = null;
+    function showContent() {
+      const localContent = content;
+      dataPromise = null;
+      content = null;
+      return localContent;
+    }
+    function swapContent(cleartext) {
+      content = cleartext;
+      const aEl = document.createElement('A')
+      aEl.href = 'javascript:showContent()';
+
+      aEl.click();
+    }
+
+    if (localStorage.getItem(localStorageKey)) {
+      dataPromise
+        .then(function(encrypted) {
+          return decrypt(localStorage.getItem(localStorageKey), encrypted);
+        })
+        .then(swapContent)
+        .catch(function(err) {
+          console.log("Error decrypting from localStorage", err);
+        });
+    }
+
+    function deriveKey(salt, password) {
+      const encoder = new TextEncoder()
+      return crypto.subtle.importKey(
+        'raw',
+        encoder.encode(password),
+        'PBKDF2',
+        false,
+        ['deriveKey'],
+      ).then(function (baseKey) {
+        return crypto.subtle.deriveKey(
+          { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+          baseKey,
+          { name: 'AES-GCM', length: 256 },
+          true,
+          ['decrypt'],
+        )
+      })
+    }
+
+    function decrypt(password, content) {
+      const salt = new DataView(content, 0, 32);
+      const iv = new DataView(content, 32, 16);
+      const ciphertext = new DataView(content, 32 + 16);
+
+      return deriveKey(salt, password).then(function (key) {
+        return crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+      }).then(function (clear) {
+        return new TextDecoder().decode(new Uint8Array(clear));
+      });
+    }
+    window.addEventListener('load', function () {
+      document.getElementById('decryptButton').addEventListener('click', function () {
+        const password = document.getElementById('decryptPassword').value;
+        dataPromise.then(function(encrypted) {
+          return decrypt(password, encrypted);
+        }).then(function(cleartext) {
+          if (document.getElementById('storePasswordCheckbox').checked) {
+            localStorage.setItem(localStorageKey, password)
+          }
+          return cleartext;
+        }).then(swapContent)
+        .catch(function(err) {
+          alert("Error during decryption");
+        });
+      });
+    })
+  </script>
+  <body>
+    <form action="javascript:;">
+      <label>Password: <input type="password" id="decryptPassword" required="required" autocomplete="off"></label> <button id="decryptButton">Decrypt</button>
+      <br/>
+      <label><input type="checkbox" checked="checked" id="storePasswordCheckbox"> Store password</label>
+    </form>
+  </body>
+</html>

@@ -20,7 +20,11 @@ repos:
     rev: v0.982
     hooks:
       - id: mypy
+        additional_dependencies:
+          - pycryptodome
   - repo: https://github.com/PyCQA/pylint
     rev: v2.15.4
     hooks:
       - id: pylint
+        additional_dependencies:
+          - pycryptodome
