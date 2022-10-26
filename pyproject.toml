@@ -12,7 +12,7 @@ authors = [
 ]
 description = "Tool for encrypting HTML files and generating JavaScript to decrypt it"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
