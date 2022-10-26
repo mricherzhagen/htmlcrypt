@@ -90,3 +90,9 @@ def test_specify_all_filenames(tmp_path: pathlib.Path) -> None:
     run_with_files(
         input_file_path, encrypted=encrypted_file_path, decrypt=decrypt_file_path
     )
+
+
+def test_empty_password(tmp_path: pathlib.Path) -> None:
+    input_file_path = tmp_path / "input.txt"
+    create_test_file(input_file_path)
+    run_with_files(input_file_path, password="")

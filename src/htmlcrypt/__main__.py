@@ -9,6 +9,7 @@ from .encrypt import encrypt_file
 from .decrypt import write_decrypt_file
 
 
+# pylint: disable=too-many-branches
 def main() -> None:
     """Use sys.argv arguments to specify file for encryption"""
     parser = argparse.ArgumentParser(
@@ -65,7 +66,7 @@ def main() -> None:
                 "The decryption file cannot be the same as the input or encrypted file"
             )
 
-    if args.password:
+    if args.password is not None:
         password = args.password
     else:
         while True:
