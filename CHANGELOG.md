@@ -1,5 +1,17 @@
 # What's new?
 
+## [0.2.0] - 2022-10-26
+### Added
+- Testcases using `tox`
+
+### Changed
+- Improve decrypt template. Centered `<div>`, `DOCTYPE`, UTF-8
+- set argparse `prog` based on `__name__`
+- Set minimum python version to 3.9
+
+### Fixed
+- Fix default encrypted filename not placing files next to decrypt file in subfolder
+
 ## [0.1.0] - 2022-10-25
 ### Added
 - Check that provided file arguments are unique files
