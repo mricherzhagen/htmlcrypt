@@ -8,6 +8,7 @@ from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Hash import SHA256
 
+
 # pylint: disable=too-few-public-methods
 class _SupportsRead(typing.Protocol):
     # pylint: disable=missing-function-docstring
