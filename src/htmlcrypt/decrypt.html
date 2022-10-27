@@ -17,10 +17,7 @@
     }
     function swapContent(cleartext) {
       content = cleartext;
-      const aEl = document.createElement('A')
-      aEl.href = 'javascript:showContent()';
-
-      aEl.click();
+      location.href = 'javascript:showContent()';
     }
 
     if (localStorage.getItem(localStorageKey)) {
@@ -66,6 +63,10 @@
     }
     window.addEventListener('load', function () {
       document.getElementById('decryptButton').addEventListener('click', function () {
+        if (!dataPromise) {
+          console.log("intercepted click with empty dataPromise")
+          return;
+        }
         const password = document.getElementById('decryptPassword').value;
         dataPromise.then(function(encrypted) {
           return decrypt(password, encrypted);
