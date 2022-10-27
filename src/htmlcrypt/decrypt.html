@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="en"><head>
   <!-- Page encrypted with https://github.com/mricherzhagen/htmlcrypt -->
+  <title>Password protected page</title>
   <meta charset="UTF-8">
   <script>
     const encryptedFileName = 'content.html.encrypted';
@@ -40,14 +41,14 @@
         encoder.encode(password),
         'PBKDF2',
         false,
-        ['deriveKey'],
+        ['deriveKey']
       ).then(function (baseKey) {
         return crypto.subtle.deriveKey(
           { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
           baseKey,
           { name: 'AES-GCM', length: 256 },
           true,
-          ['decrypt'],
+          ['decrypt']
         )
       })
     }
@@ -96,9 +97,9 @@
 </head><body>
   <div class="container">
     <form action="javascript:;">
-      <input type="password" id="decryptPassword" required="required" placeholder="Password"> <button id="decryptButton">Decrypt</button>
+      <input type="password" id="decryptPassword" required="required" placeholder="Password" /> <button id="decryptButton">Decrypt</button>
       <br/>
-      <label><input type="checkbox" checked="checked" id="storePasswordCheckbox"> Store password</label>
+      <label><input type="checkbox" checked="checked" id="storePasswordCheckbox" /> Store password</label>
     </form>
   </div>
 </body></html>
