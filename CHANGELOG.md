@@ -1,5 +1,14 @@
 # What's new?
 
+## [0.2.1] - 2022-10-27
+### Added
+- `<title>` for decrypt template
+
+### Fixed
+- Don't ask for password from stdin if empty password was supplied with `-p ""`
+- Minor code formatting issues in decrypt template
+- Issue with Safari Browser: Decrypted content was not shown after click
+
 ## [0.2.0] - 2022-10-26
 ### Added
 - Testcases using `tox`

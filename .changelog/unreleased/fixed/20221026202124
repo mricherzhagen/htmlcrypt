@@ -1,1 +1,0 @@
-Don't ask for password from stdin if empty password was supplied with `-p ""`
