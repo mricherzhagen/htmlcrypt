@@ -1,5 +1,9 @@
 # What's new?
 
+## [0.2.2] - 2022-10-28
+### Added
+- HTML comments marking sections to allow for easier theming of decrypt page.
+
 ## [0.2.1] - 2022-10-27
 ### Added
 - `<title>` for decrypt template
